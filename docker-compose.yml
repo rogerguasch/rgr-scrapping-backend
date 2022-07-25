@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  rgr-scrapping-backend:
+    container_name: rgr-scrapping-backend
+#    user: "${UID}:${GID}"
+    user: "1000:1000"
+    build:
+      context: ./infrastructure/php
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8040:8040"
+      - "9040:9001"
+    volumes:
+      - .:/app:delegated
+    command: symfony serve --port=8040
