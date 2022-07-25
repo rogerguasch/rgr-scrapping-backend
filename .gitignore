@@ -1,1 +1,4 @@
 /vendor/*
+/var/cache/dev/*
+/var/log/*
+.idea
