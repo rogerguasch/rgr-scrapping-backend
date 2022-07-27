@@ -1,3 +1,5 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
+user_register:
+    methods: POST
+    path: /user/register
+    controller: App\User\UI\Controllers\RegisterUserPostController
+
