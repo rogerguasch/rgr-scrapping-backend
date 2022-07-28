@@ -14,3 +14,23 @@ services:
     volumes:
       - .:/app:delegated
     command: symfony serve --port=8040
+
+  rgr-scrapping-database:
+    container_name: rgr-scrapping-database
+    image: mysql:8.0
+    ports:
+      - 3360:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=no
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "--user=root", "--password=", "--host=127.0.0.1", "ping", "--silent" ]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
