@@ -17,7 +17,7 @@ class RegisterUserPostController extends AbstractController
     ){
     }
 
-    public function __invoke()
+    public function __invoke(): Response
     {
 
         $name = 'name';
