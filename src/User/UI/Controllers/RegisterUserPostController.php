@@ -6,6 +6,7 @@ use App\User\Application\Register\RegisterUserUseCase;
 use App\User\Application\Register\Request\RegisterUserRequest;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Uid\Uuid;
 
@@ -13,19 +14,19 @@ class RegisterUserPostController extends AbstractController
 {
 
     public function __construct(
-        private readonly RegisterUserUseCase $registerUserUseCase,
-        private readonly LoggerInterface $logger
+        private readonly RegisterUserUseCase $registerUserUseCase
     ){
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
+        $body = $request->toArray();
 
-        $id = Uuid::v4()->toRfc4122();
-        $name = 'name';
-        $email = 'email@email.com';
-        $registerUserRequest = new RegisterUserRequest($id, $name,$email);
-        $this->logger->info('RegisterUserPostController *******************************');
+        $registerUserRequest = new RegisterUserRequest(
+            Uuid::v4()->toRfc4122(),
+            $body['name'],
+            $body['email']
+        );
 
         $this->registerUserUseCase->__invoke($registerUserRequest);
 

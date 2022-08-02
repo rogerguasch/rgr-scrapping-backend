@@ -3,7 +3,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="App\User\Domain\User" table="users">
-        <id name="id" column="id" type="string" length="36"/>
+        <id name="id" column="id" type="uuid" />
         <embedded class="App\User\Domain\UserName" name="name" use-column-prefix="false"/>
         <embedded class="App\User\Domain\UserEmail" name="email" use-column-prefix="false"/>
     </entity>

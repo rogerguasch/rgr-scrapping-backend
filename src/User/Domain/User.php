@@ -2,17 +2,19 @@
 
 namespace App\User\Domain;
 
+use App\Shared\ValueObjects\Uuid;
+
 class User
 {
 
     public function __construct(
-        private readonly UserId    $id,
+        private readonly Uuid $id,
         private readonly UserName  $name,
         private readonly UserEmail $email,
     ){
     }
 
-    public function id(): UserId
+    public function id(): Uuid
     {
         return $this->id;
     }
@@ -26,6 +28,5 @@ class User
     {
         return $this->email;
     }
-
 
 }

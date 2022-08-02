@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
-use App\Shared\ValueObjects\UuidValueObject;
+use App\Shared\ValueObjects\Uuid;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
@@ -19,17 +19,17 @@ class UuidType extends StringType
         );
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?UuidValueObject
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?Uuid
     {
         if (empty($value)) {
             return null;
         }
 
-        if ($value instanceof UuidValueObject) {
+        if ($value instanceof Uuid) {
             return $value;
         }
 
-        return new UuidValueObject($value);
+        return new Uuid($value);
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
@@ -38,7 +38,7 @@ class UuidType extends StringType
             return null;
         }
 
-        if ($value instanceof UuidValueObject) {
+        if ($value instanceof Uuid) {
             return $value->value();
         }
 

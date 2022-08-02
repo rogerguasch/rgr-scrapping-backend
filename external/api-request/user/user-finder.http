@@ -1,0 +1,4 @@
+GET {{ host }}/user/find?email=roger@email.com
+Accept: */*
+X-Forwarded-For: 8.8.8.8
+Content-Type: application/json
